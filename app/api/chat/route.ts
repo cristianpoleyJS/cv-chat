@@ -5,10 +5,10 @@ import { systemPrompt } from "./system_prompt";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-async function fetchContextMarkdown(): Promise<string> {
-  const url = process.env.CONTEXT_URL;
+async function fetchContextMarkdown(locale: string): Promise<string> {
+  const url = locale === "es" ? process.env.CONTEXT_URL_ES : process.env.CONTEXT_URL_EN;
   if (!url) {
-    throw new Error("Missing CONTEXT_URL env var.");
+    throw new Error(`Missing CONTEXT_URL_${locale.toUpperCase()} env var.`);
   }
 
   const res = await fetch(url, {
@@ -32,11 +32,11 @@ async function fetchContextMarkdown(): Promise<string> {
 }
 
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json();
+  const { messages, locale = "en" }: { messages: UIMessage[]; locale?: string } = await req.json();
 
   let context = "";
   try {
-    context = await fetchContextMarkdown();
+    context = await fetchContextMarkdown(locale);
   } catch (e) {
     context =
       "Context is currently unavailable. You must respond: \"I don't have that information.\"";

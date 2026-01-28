@@ -4,12 +4,12 @@
     "title": "Engineering Manager · Senior Frontend Engineer"
   },
   "welcome": {
-    "greeting": "Hey!, soy el asistente de Cristian",
-    "description": "Aquí puedes preguntarme sobre su experiencia, habilidades técnicas, estilo de liderazgo o más cosas.",
+    "greeting": "Hey! Soy el asistente de Cristian",
+    "description": "Aquí puedes preguntarme sobre su experiencia profesional, habilidades técnicas y forma de trabajar con equipos de ingeniería.",
     "avatarAlt": "Cristian Poley"
   },
   "suggestions": {
-    "title": "Preguntas habituales",
+    "title": "Empieza por aquí",
     "items": [
       {
         "icon": "code",
@@ -26,19 +26,19 @@
       {
         "icon": "users",
         "title": "Forma de liderar",
-        "label": "¿Cómo lideras y acompañas el crecimiento de los ingenieros?",
-        "prompt": "¿Cómo es tu estilo de liderazgo y cómo ayudas a crecer a los ingenieros?"
+        "label": "¿Cómo acompaña el crecimiento y desarrollo profesional de los ingenieros?",
+        "prompt": "¿Cómo acompaña el crecimiento y desarrollo profesional de los ingenieros?"
       },
       {
         "icon": "target",
-        "title": "Siguiente paso",
-        "label": "¿Cómo te ves de aquí a 5 años?",
-        "prompt": "¿Cómo te ves de aquí a 5 años y qué te motiva de ese siguiente paso?"
+        "title": "Forma de trabajar",
+        "label": "¿Cómo suele trabajar en el día a día con su equipo y otros roles?",
+        "prompt": "¿Cómo suele trabajar en el día a día con su equipo y otros roles?"
       }
     ]
   },
   "composer": {
-    "placeholder": "Pregunta sobre mi experiencia, liderazgo o algo más...",
+    "placeholder": "Pregunta sobre su experiencia, forma de trabajar o perfil técnico...",
     "sendTooltip": "Enviar",
     "sendAriaLabel": "Enviar mensaje",
     "stopAriaLabel": "Detener respuesta"

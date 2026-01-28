@@ -285,7 +285,7 @@ const AssistantMessage: FC = () => {
       data-role="assistant"
     >
       <div className="flex gap-3 px-2">
-        <div className="shrink-0 mt-1">
+        <div className="shrink-0">
           <div className="relative">
             <img
               src={config.avatarUrl}
@@ -409,7 +409,7 @@ const UserActionBar: FC = () => {
       className="aui-user-action-bar-root flex flex-col items-end"
     >
       <ActionBarPrimitive.Edit asChild>
-        <TooltipIconButton tooltip={t.actions.edit} className="aui-user-action-edit p-4">
+        <TooltipIconButton tooltip={t.actions.edit} className="aui-user-action-edit p-4 text-stone-400 hover:text-stone-100">
           <PencilIcon />
         </TooltipIconButton>
       </ActionBarPrimitive.Edit>

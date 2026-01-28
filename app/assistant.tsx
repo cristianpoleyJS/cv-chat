@@ -7,6 +7,7 @@ import {
 } from "@assistant-ui/react-ai-sdk";
 import { Thread } from "@/components/assistant-ui/thread";
 import { LocaleProvider, useLocaleContext } from "@/contexts/locale-context";
+import { useMemo } from "react";
 
 const AssistantContent = () => {
   const { t } = useLocaleContext();
@@ -26,18 +27,31 @@ const AssistantContent = () => {
   );
 };
 
-export const Assistant = () => {
+const AssistantWithRuntime = () => {
+  const { locale } = useLocaleContext();
+
   const runtime = useChatRuntime({
-    transport: new AssistantChatTransport({
-      api: "/api/chat",
-    }),
+    transport: useMemo(
+      () =>
+        new AssistantChatTransport({
+          api: "/api/chat",
+          body: { locale },
+        }),
+      [locale]
+    ),
   });
 
   return (
+    <AssistantRuntimeProvider runtime={runtime}>
+      <AssistantContent />
+    </AssistantRuntimeProvider>
+  );
+};
+
+export const Assistant = () => {
+  return (
     <LocaleProvider>
-      <AssistantRuntimeProvider runtime={runtime}>
-        <AssistantContent />
-      </AssistantRuntimeProvider>
+      <AssistantWithRuntime />
     </LocaleProvider>
   );
 };
