@@ -1,0 +1,67 @@
+import { openai } from "@ai-sdk/openai";
+import { streamText, convertToModelMessages, type UIMessage } from "ai";
+import { systemPrompt } from "./system_prompt";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+async function fetchContextMarkdown(): Promise<string> {
+  const url = process.env.CONTEXT_URL;
+  if (!url) {
+    throw new Error("Missing CONTEXT_URL env var.");
+  }
+
+  const res = await fetch(url, {
+    headers: {
+      ...(process.env.CONTEXT_AUTH_BEARER
+        ? { Authorization: `Bearer ${process.env.CONTEXT_AUTH_BEARER}` }
+        : {}),
+      Accept: "text/markdown, text/plain;q=0.9, */*;q=0.8",
+    },
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch CONTEXT_URL (${res.status} ${res.statusText})`);
+  }
+
+  const text = await res.text();
+
+  const MAX_CHARS = 35_000;
+  return text.length > MAX_CHARS ? text.slice(0, MAX_CHARS) : text;
+}
+
+export async function POST(req: Request) {
+  const { messages }: { messages: UIMessage[] } = await req.json();
+
+  let context = "";
+  try {
+    context = await fetchContextMarkdown();
+  } catch (e) {
+    context =
+      "Context is currently unavailable. You must respond: \"I don't have that information.\"";
+    console.error(e);
+  }
+
+  const modelMessages = convertToModelMessages(messages);
+
+  const guardedMessages = [
+    { role: "system" as const, content: systemPrompt(context) },
+    ...modelMessages,
+  ];
+
+  const result = streamText({
+    model: openai.responses("gpt-5-nano"),
+    messages: guardedMessages,
+    providerOptions: {
+      openai: {
+        reasoningEffort: "low",
+        reasoningSummary: "auto",
+      },
+    },
+  });
+
+  return result.toUIMessageStreamResponse({
+    sendReasoning: true,
+  });
+}

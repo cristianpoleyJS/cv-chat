@@ -1,0 +1,82 @@
+{
+  "header": {
+    "name": "Cristian Poley",
+    "title": "Engineering Manager · Senior Frontend Engineer"
+  },
+  "welcome": {
+    "greeting": "Hey!, I’m Cristian’s assistant",
+    "description": "Here you can ask about his experience, technical skills, leadership style, or anything else.",
+    "avatarAlt": "Cristian Poley"
+  },
+  "suggestions": {
+    "title": "Common questions",
+    "items": [
+      {
+        "icon": "code",
+        "title": "Technical profile",
+        "label": "What are your technical strengths and how have you applied them?",
+        "prompt": "What are your technical strengths and how have you applied them in your work?"
+      },
+      {
+        "icon": "rocket",
+        "title": "Impact and results",
+        "label": "Which achievements stand out and what impact did they have?",
+        "prompt": "What have been your most relevant achievements and their measurable impact?"
+      },
+      {
+        "icon": "users",
+        "title": "Leadership approach",
+        "label": "How do you lead and support engineers’ growth?",
+        "prompt": "What is your leadership style and how do you help engineers grow?"
+      },
+      {
+        "icon": "target",
+        "title": "Next step",
+        "label": "How do you see yourself in five years?",
+        "prompt": "How do you see yourself in five years, and what motivates that next step?"
+      }
+    ]
+  },
+  "composer": {
+    "placeholder": "Ask about my experience, leadership, or something else...",
+    "sendTooltip": "Send",
+    "sendAriaLabel": "Send message",
+    "stopAriaLabel": "Stop response"
+  },
+  "actions": {
+    "reset": "Reset chat",
+    "scrollToBottom": "Jump to latest message",
+    "copy": "Copy",
+    "refresh": "Refresh",
+    "more": "More options",
+    "edit": "Edit",
+    "exportMarkdown": "Export to Markdown",
+    "cancel": "Cancel",
+    "update": "Save changes",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "messages": {
+    "assistantAlt": "Cristian Poley"
+  },
+  "attachments": {
+    "remove": "Remove file",
+    "add": "Add attachment",
+    "loading": "Loading conversations"
+  },
+  "threadList": {
+    "newThread": "New conversation",
+    "newChatFallback": "New chat",
+    "moreOptions": "More options",
+    "archive": "Archive"
+  },
+  "tools": {
+    "cancelledTool": "Cancelled tool:",
+    "usedTool": "Tool used:",
+    "cancelledReason": "Cancellation reason:",
+    "result": "Result:"
+  },
+  "reasoning": {
+    "label": "Reasoning"
+  }
+}

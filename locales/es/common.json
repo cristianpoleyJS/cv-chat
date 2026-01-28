@@ -1,0 +1,82 @@
+{
+  "header": {
+    "name": "Cristian Poley",
+    "title": "Engineering Manager · Senior Frontend Engineer"
+  },
+  "welcome": {
+    "greeting": "Hey!, soy el asistente de Cristian",
+    "description": "Aquí puedes preguntarme sobre su experiencia, habilidades técnicas, estilo de liderazgo o más cosas.",
+    "avatarAlt": "Cristian Poley"
+  },
+  "suggestions": {
+    "title": "Preguntas habituales",
+    "items": [
+      {
+        "icon": "code",
+        "title": "Perfil técnico",
+        "label": "¿Cuáles son tus puntos fuertes técnicos y cómo los has aplicado?",
+        "prompt": "¿Cuáles son tus puntos fuertes técnicos y cómo los has aplicado en tu trabajo?"
+      },
+      {
+        "icon": "rocket",
+        "title": "Impacto y resultados",
+        "label": "¿Qué logros destacarías y qué impacto tuvieron?",
+        "prompt": "¿Cuáles han sido tus logros más relevantes y qué impacto medible tuvieron?"
+      },
+      {
+        "icon": "users",
+        "title": "Forma de liderar",
+        "label": "¿Cómo lideras y acompañas el crecimiento de los ingenieros?",
+        "prompt": "¿Cómo es tu estilo de liderazgo y cómo ayudas a crecer a los ingenieros?"
+      },
+      {
+        "icon": "target",
+        "title": "Siguiente paso",
+        "label": "¿Cómo te ves de aquí a 5 años?",
+        "prompt": "¿Cómo te ves de aquí a 5 años y qué te motiva de ese siguiente paso?"
+      }
+    ]
+  },
+  "composer": {
+    "placeholder": "Pregunta sobre mi experiencia, liderazgo o algo más...",
+    "sendTooltip": "Enviar",
+    "sendAriaLabel": "Enviar mensaje",
+    "stopAriaLabel": "Detener respuesta"
+  },
+  "actions": {
+    "reset": "Reiniciar chat",
+    "scrollToBottom": "Ir al último mensaje",
+    "copy": "Copiar",
+    "refresh": "Actualizar",
+    "more": "Más opciones",
+    "edit": "Editar",
+    "exportMarkdown": "Exportar a Markdown",
+    "cancel": "Cancelar",
+    "update": "Guardar cambios",
+    "previous": "Anterior",
+    "next": "Siguiente"
+  },
+  "messages": {
+    "assistantAlt": "Cristian Poley"
+  },
+  "attachments": {
+    "remove": "Eliminar archivo",
+    "add": "Añadir adjunto",
+    "loading": "Cargando conversaciones"
+  },
+  "threadList": {
+    "newThread": "Nueva conversación",
+    "newChatFallback": "Nuevo chat",
+    "moreOptions": "Más opciones",
+    "archive": "Archivar"
+  },
+  "tools": {
+    "cancelledTool": "Herramienta cancelada:",
+    "usedTool": "Herramienta utilizada:",
+    "cancelledReason": "Motivo de cancelación:",
+    "result": "Resultado:"
+  },
+  "reasoning": {
+    "label": "Razonamiento"
+  }
+}
