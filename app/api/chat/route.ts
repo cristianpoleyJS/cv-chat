@@ -1,9 +1,25 @@
 import { openai } from "@ai-sdk/openai";
 import { streamText, convertToModelMessages, type UIMessage } from "ai";
 import { systemPrompt } from "./system_prompt";
+import { checkRateLimit } from "@/lib/rate-limit";
+import { headers } from "next/headers";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+function getClientIP(headersList: Headers): string {
+  const forwardedFor = headersList.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0].trim();
+  }
+  
+  const realIP = headersList.get("x-real-ip");
+  if (realIP) {
+    return realIP;
+  }
+  
+  return "anonymous";
+}
 
 async function fetchContextMarkdown(locale: string): Promise<string> {
   const url = locale === "es" ? process.env.CONTEXT_URL_ES : process.env.CONTEXT_URL_EN;
@@ -32,6 +48,29 @@ async function fetchContextMarkdown(locale: string): Promise<string> {
 }
 
 export async function POST(req: Request) {
+  // Rate limiting
+  const headersList = await headers();
+  const ip = getClientIP(headersList);
+  
+  const rateLimitResult = await checkRateLimit(ip);
+  
+  if (!rateLimitResult.success) {
+    return new Response(
+      JSON.stringify({ 
+        error: "Too many requests. Please try again later.",
+        retryAfter: Math.ceil((rateLimitResult.reset - Date.now()) / 1000)
+      }),
+      { 
+        status: 429,
+        headers: {
+          "Content-Type": "application/json",
+          ...rateLimitResult.headers,
+          "Retry-After": Math.ceil((rateLimitResult.reset - Date.now()) / 1000).toString(),
+        }
+      }
+    );
+  }
+
   const { messages, locale = "en" }: { messages: UIMessage[]; locale?: string } = await req.json();
 
   let context = "";
