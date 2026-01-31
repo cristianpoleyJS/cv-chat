@@ -35,6 +35,7 @@ import {
   CodeIcon,
   CopyIcon,
   DownloadIcon,
+  FileTextIcon,
   MoreHorizontalIcon,
   PencilIcon,
   RefreshCwIcon,
@@ -52,9 +53,9 @@ import type { FC, ReactNode } from "react";
 export const Thread: FC = () => {
   return (
     <ThreadPrimitive.Root
-      className="aui-root aui-thread-root @container flex h-full flex-col bg-stone-900"
+      className="aui-root aui-thread-root @container flex h-full flex-col bg-linear-to-br from-slate-950 via-slate-900 to-slate-900"
       style={{
-        ["--thread-max-width" as string]: "52rem",
+        ["--thread-max-width" as string]: "58rem",
       }}
     >
       <ThreadPrimitive.Viewport
@@ -91,7 +92,7 @@ const ThreadScrollToBottom: FC = () => {
       <TooltipIconButton
         tooltip={t.actions.scrollToBottom}
         variant="outline"
-        className="aui-thread-scroll-to-bottom absolute -top-12 z-10 self-center rounded-full p-4 disabled:invisible bg-stone-800 hover:bg-stone-700 border-stone-700 text-stone-300"
+        className="aui-thread-scroll-to-bottom absolute -top-12 z-10 self-center rounded-full p-4 disabled:invisible bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-300"
       >
         <ArrowDownIcon />
       </TooltipIconButton>
@@ -117,7 +118,7 @@ const ResetButton: FC = () => {
           disabled={isDisabled}
           variant="ghost"
           size="sm"
-          className="gap-2 rounded-full border border-stone-700 bg-stone-800/80 px-4 py-2 text-stone-400 hover:bg-stone-700 hover:text-stone-100 hover:border-stone-600 transition-all duration-200 text-xs disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-stone-800/80 disabled:hover:text-stone-400 disabled:hover:border-stone-700"
+          className="gap-2 rounded-full border border-slate-700 bg-slate-800/80 px-4 py-2 text-slate-400 hover:bg-slate-700 hover:text-slate-100 hover:border-slate-600 transition-all duration-200 text-xs disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-slate-800/80 disabled:hover:text-slate-400 disabled:hover:border-slate-700"
         >
           <RotateCcwIcon className="size-3.5" />
           {t.actions.reset}
@@ -133,26 +134,48 @@ const ThreadWelcome: FC = () => {
   return (
     <div className="aui-thread-welcome-root mx-auto my-auto flex w-full max-w-(--thread-max-width) grow flex-col justify-center px-4 sm:px-6">
       <div className="aui-thread-welcome-center flex w-full flex-col items-center justify-center">
-        <div className="aui-thread-welcome-message flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-center sm:text-left">
-          <div className="fade-in slide-in-from-left-2 animate-in duration-200 shrink-0">
-            <div className="relative">
-              <img
-                src={config.avatarUrl}
-                alt={t.welcome.avatarAlt}
-                className="size-16 sm:size-30 rounded-full object-cover ring-2 ring-stone-700/50 shadow-xl shadow-stone-950"
-              />
-              <div className="absolute -bottom-0.5 -right-0.5 size-5 sm:size-6 rounded-full bg-emerald-500 ring-2 ring-stone-900 flex items-center justify-center">
-                <SparklesIcon className="size-2.5 sm:size-3 text-white" />
+        {/* Name and title */}
+        <div className="fade-in animate-in duration-300 mb-5 sm:mb-6 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight bg-linear-to-r from-slate-100 to-slate-300 bg-clip-text text-transparent">
+            {t.header.name}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1.5 tracking-wide">
+            {t.header.title}
+          </p>
+        </div>
+        
+        {/* Assistant card */}
+        <div className="aui-thread-welcome-message w-full max-w-lg rounded-2xl border border-slate-700/40 bg-linear-to-br from-slate-800/60 to-slate-900/40 backdrop-blur-sm p-4 sm:p-4 shadow-xl shadow-slate-950/50">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4">
+            <div className="fade-in slide-in-from-left-2 animate-in duration-300 shrink-0">
+              <div className="relative">
+                <img
+                  src={config.avatarUrl}
+                  alt={t.welcome.avatarAlt}
+                  className="size-14 sm:size-20 rounded-full object-cover ring-2 ring-slate-600/50 shadow-lg shadow-slate-950/80"
+                />
+                <div className="absolute -bottom-0.5 -right-0.5 size-5 sm:size-6 rounded-full bg-linear-to-br from-emerald-400 to-emerald-600 ring-2 ring-slate-800 flex items-center justify-center shadow-lg">
+                  <SparklesIcon className="size-2.5 sm:size-3 text-white" />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex flex-col">
-            <h1 className="aui-thread-welcome-message-inner fade-in slide-in-from-bottom-1 animate-in font-bold text-xl sm:text-2xl text-stone-100 duration-200 delay-75">
-              {t.welcome.greeting}
-            </h1>
-            <p className="aui-thread-welcome-message-inner fade-in slide-in-from-bottom-1 animate-in text-stone-400 text-xs sm:text-sm mt-1.5 delay-100 duration-200 max-w-sm leading-relaxed">
-              {t.welcome.description}
-            </p>
+            <div className="flex flex-col text-center sm:text-left flex-1">
+              <h1 className="aui-thread-welcome-message-inner fade-in slide-in-from-bottom-1 animate-in font-semibold text-base sm:text-lg text-slate-100 duration-300 delay-75">
+                {t.welcome.greeting}
+              </h1>
+              <p className="aui-thread-welcome-message-inner fade-in slide-in-from-bottom-1 animate-in text-slate-400 text-xs sm:text-sm mt-1.5 delay-100 duration-300 leading-relaxed">
+                {t.welcome.description}
+              </p>
+              <a
+                href={t.welcome.cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="fade-in slide-in-from-bottom-1 animate-in delay-200 duration-300 mt-3 inline-flex items-center gap-2 self-center sm:self-start px-3.5 py-2 text-xs sm:text-sm font-medium text-slate-200 bg-slate-700/50 hover:bg-slate-600/60 border border-slate-600/50 hover:border-slate-500 rounded-xl transition-all hover:text-white hover:shadow-lg hover:shadow-slate-900/40 hover:-translate-y-0.5 active:translate-y-0"
+              >
+                <FileTextIcon className="size-3.5" />
+                {t.welcome.downloadCV}
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -162,41 +185,41 @@ const ThreadWelcome: FC = () => {
 };
 
 const SUGGESTION_ICONS: Record<string, ReactNode> = {
-  code: <CodeIcon className="size-5 sm:size-6 text-blue-400" />,
-  rocket: <RocketIcon className="size-5 sm:size-6 text-orange-400" />,
-  users: <UsersIcon className="size-5 sm:size-6 text-violet-400" />,
-  target: <TargetIcon className="size-5 sm:size-6 text-emerald-400" />,
+  code: <CodeIcon className="size-4 sm:size-5 text-sky-400" />,
+  rocket: <RocketIcon className="size-4 sm:size-5 text-amber-400" />,
+  users: <UsersIcon className="size-4 sm:size-5 text-purple-400" />,
+  target: <TargetIcon className="size-4 sm:size-5 text-teal-400" />,
 };
 
 const ThreadSuggestions: FC = () => {
   const { t } = useLocaleContext();
   
   return (
-    <div className="aui-thread-welcome-suggestions mt-6 sm:mt-8 w-full">
-      <div className="flex items-center gap-2 mb-3 sm:mb-4">
-        <SparklesIcon className="size-4 text-stone-500" />
-        <span className="text-xs sm:text-sm font-medium text-stone-400">{t.suggestions.title}</span>
+    <div className="aui-thread-welcome-suggestions mt-5 sm:mt-6 w-full">
+      <div className="flex items-center gap-2 mb-3">
+        <SparklesIcon className="size-3.5 text-slate-500" />
+        <span className="text-xs sm:text-sm font-medium text-slate-400 tracking-wide">{t.suggestions.title}</span>
       </div>
-      <div className="grid w-full grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 pb-4">
+      <div className="grid w-full grid-cols-2 gap-2 sm:gap-2.5">
         {t.suggestions.items.map((suggestion: { icon: string; title: string; label: string; prompt: string }, index: number) => (
           <div
             key={suggestion.prompt}
-            className="aui-thread-welcome-suggestion-display fade-in slide-in-from-bottom-2 animate-in fill-mode-both duration-200"
-            style={{ animationDelay: `${150 + index * 75}ms` }}
+            className="aui-thread-welcome-suggestion-display fade-in slide-in-from-bottom-2 animate-in fill-mode-both duration-300 min-w-0"
+            style={{ animationDelay: `${200 + index * 80}ms` }}
           >
             <ThreadPrimitive.Suggestion prompt={suggestion.prompt} send asChild>
               <Button
                 variant="ghost"
-                className="aui-thread-welcome-suggestion cursor-pointer group h-full w-full flex-col items-start justify-start gap-2 rounded-2xl border border-stone-700/60 bg-stone-800/50 backdrop-blur-sm px-4 py-4 text-left transition-all duration-300 hover:bg-stone-800 hover:border-stone-600 hover:shadow-lg hover:shadow-stone-900/50 hover:scale-[1.02] active:scale-[0.98]"
+                className="aui-thread-welcome-suggestion cursor-pointer group h-full w-full flex-col items-start justify-start gap-1.5 sm:gap-2 rounded-xl border border-slate-700/50 bg-slate-800/40 hover:bg-slate-800/80 backdrop-blur-sm px-3 py-3 sm:px-4 sm:py-3.5 text-left transition-all duration-300 hover:border-slate-600 hover:shadow-xl hover:shadow-slate-950/40 hover:scale-[1.02] active:scale-[0.98]"
                 aria-label={suggestion.prompt}
               >
-                <div className="mb-1 transition-transform duration-300 group-hover:scale-110">
+                <div className="p-1.5 sm:p-2 rounded-lg bg-slate-700/40 group-hover:bg-slate-700/60 transition-all duration-300 group-hover:scale-105 shrink-0">
                   {SUGGESTION_ICONS[suggestion.icon]}
                 </div>
-                <span className="aui-thread-welcome-suggestion-text-1 font-semibold text-sm text-stone-200 group-hover:text-stone-50 transition-colors">
+                <span className="aui-thread-welcome-suggestion-text-1 font-semibold text-[16px] text-slate-200 group-hover:text-white transition-colors whitespace-normal">
                   {suggestion.title}
                 </span>
-                <span className="aui-thread-welcome-suggestion-text-2 text-stone-500 text-xs sm:text-sm font-normal leading-relaxed whitespace-normal wrap-break-word group-hover:text-stone-400 transition-colors">
+                <span className="aui-thread-welcome-suggestion-text-2 text-slate-500 text-[14px] font-normal leading-snug group-hover:text-slate-400 transition-colors whitespace-normal">
                   {suggestion.label}
                 </span>
               </Button>
@@ -213,11 +236,11 @@ const Composer: FC = () => {
   
   return (
     <ComposerPrimitive.Root className="aui-composer-root relative flex w-full flex-col px-2 sm:px-0">
-      <ComposerPrimitive.AttachmentDropzone className="aui-composer-attachment-dropzone flex w-full flex-col rounded-2xl border border-stone-700/60 bg-stone-800/80 backdrop-blur-sm px-1 pt-2 shadow-lg shadow-stone-950/50 outline-none transition-all duration-300 has-[textarea:focus-visible]:border-stone-600 has-[textarea:focus-visible]:ring-2 has-[textarea:focus-visible]:ring-stone-600/30 has-[textarea:focus-visible]:bg-stone-800 data-[dragging=true]:border-stone-500 data-[dragging=true]:border-dashed data-[dragging=true]:bg-stone-700">
+      <ComposerPrimitive.AttachmentDropzone className="aui-composer-attachment-dropzone flex w-full flex-col rounded-2xl border border-slate-700/60 bg-slate-800/80 backdrop-blur-sm px-1 pt-2 shadow-lg shadow-slate-950/50 outline-none transition-all duration-300 has-[textarea:focus-visible]:border-slate-600 has-[textarea:focus-visible]:ring-2 has-[textarea:focus-visible]:ring-slate-600/30 has-[textarea:focus-visible]:bg-slate-800 data-[dragging=true]:border-slate-500 data-[dragging=true]:border-dashed data-[dragging=true]:bg-slate-700">
         <ComposerAttachments />
         <ComposerPrimitive.Input
           placeholder={t.composer.placeholder}
-          className="aui-composer-input mb-1 max-h-32 min-h-12 sm:min-h-14 w-full resize-none bg-transparent px-3 sm:px-4 pt-2 pb-3 text-sm text-stone-100 outline-none placeholder:text-stone-500 focus-visible:ring-0"
+          className="aui-composer-input mb-1 max-h-32 min-h-12 sm:min-h-14 w-full resize-none bg-transparent px-3 sm:px-4 pt-2 pb-3 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus-visible:ring-0"
           rows={1}
           autoFocus
           aria-label={t.composer.sendAriaLabel}
@@ -241,7 +264,7 @@ const ComposerAction: FC = () => {
             type="submit"
             variant="ghost"
             size="icon"
-            className="aui-composer-send size-9 rounded-full text-stone-500 hover:text-stone-300 hover:bg-stone-700"
+            className="aui-composer-send size-9 rounded-full text-slate-500 hover:text-slate-300 hover:bg-slate-700"
             aria-label={t.composer.sendAriaLabel}
           >
             <SendIcon className="aui-composer-send-icon size-5" />
@@ -255,7 +278,7 @@ const ComposerAction: FC = () => {
             type="button"
             variant="ghost"
             size="icon"
-            className="aui-composer-cancel size-9 rounded-full text-stone-500 hover:text-stone-300 hover:bg-stone-700"
+            className="aui-composer-cancel size-9 rounded-full text-slate-500 hover:text-slate-300 hover:bg-slate-700"
             aria-label={t.composer.stopAriaLabel}
           >
             <SquareIcon className="aui-composer-cancel-icon size-3 fill-current" />
@@ -290,15 +313,15 @@ const AssistantMessage: FC = () => {
             <img
               src={config.avatarUrl}
               alt={t.messages.assistantAlt}
-              className="size-8 rounded-full object-cover ring-2 ring-stone-700/50"
+              className="size-8 rounded-full object-cover ring-2 ring-slate-700/50"
             />
-            <div className="absolute -bottom-0.5 -right-0.5 size-3.5 rounded-full bg-emerald-500 ring-2 ring-stone-900 flex items-center justify-center">
+            <div className="absolute -bottom-0.5 -right-0.5 size-3.5 rounded-full bg-emerald-500 ring-2 ring-slate-900 flex items-center justify-center">
               <SparklesIcon className="size-2 text-white" />
             </div>
           </div>
         </div>
         <div className="flex-1 min-w-0">
-          <div className="aui-assistant-message-content wrap-break-word text-stone-100 leading-relaxed">
+          <div className="aui-assistant-message-content wrap-break-word text-slate-100 leading-relaxed">
             <MessagePrimitive.Parts
               components={{
                 Text: MarkdownText,
@@ -327,7 +350,7 @@ const AssistantActionBar: FC = () => {
       hideWhenRunning
       autohide="not-last"
       autohideFloat="single-branch"
-      className="aui-assistant-action-bar-root col-start-3 row-start-2 -ml-1 flex gap-1 text-stone-400 data-floating:absolute data-floating:rounded-md data-floating:border data-floating:border-stone-700 data-floating:bg-stone-800 data-floating:p-1 data-floating:shadow-sm"
+      className="aui-assistant-action-bar-root col-start-3 row-start-2 -ml-1 flex gap-1 text-slate-400 data-floating:absolute data-floating:rounded-md data-floating:border data-floating:border-slate-700 data-floating:bg-slate-800 data-floating:p-1 data-floating:shadow-sm"
     >
       <ActionBarPrimitive.Copy asChild>
         <TooltipIconButton tooltip={t.actions.copy}>
@@ -356,10 +379,10 @@ const AssistantActionBar: FC = () => {
         <ActionBarMorePrimitive.Content
           side="bottom"
           align="start"
-          className="aui-action-bar-more-content z-50 min-w-32 overflow-hidden rounded-md border border-stone-700 bg-stone-800 p-1 text-stone-200 shadow-md"
+          className="aui-action-bar-more-content z-50 min-w-32 overflow-hidden rounded-md border border-slate-700 bg-slate-800 p-1 text-slate-200 shadow-md"
         >
           <ActionBarPrimitive.ExportMarkdown asChild>
-            <ActionBarMorePrimitive.Item className="aui-action-bar-more-item flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-stone-700 hover:text-stone-100 focus:bg-stone-700 focus:text-stone-100">
+            <ActionBarMorePrimitive.Item className="aui-action-bar-more-item flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-slate-700 hover:text-slate-100 focus:bg-slate-700 focus:text-slate-100">
               <DownloadIcon className="size-4" />
               {t.actions.exportMarkdown}
             </ActionBarMorePrimitive.Item>
@@ -380,7 +403,7 @@ const UserMessage: FC = () => {
         <div className="flex-1 min-w-0 flex flex-col items-end">
           <UserMessageAttachments />
           <div className="aui-user-message-content-wrapper relative max-w-[85%]">
-            <div className="aui-user-message-content wrap-break-word rounded-2xl bg-stone-700 px-4 py-2.5 text-stone-100">
+            <div className="aui-user-message-content wrap-break-word rounded-2xl bg-slate-700 px-4 py-2.5 text-slate-100">
               <MessagePrimitive.Parts />
             </div>
             <div className="aui-user-action-bar-wrapper absolute top-1/2 left-0 -translate-x-full -translate-y-1/2 pr-2">
@@ -390,8 +413,8 @@ const UserMessage: FC = () => {
           <BranchPicker className="aui-user-branch-picker mt-1 -mr-1 justify-end" />
         </div>
         <div className="shrink-0 mt-1">
-          <div className="size-8 rounded-full bg-stone-600 ring-2 ring-stone-700/50 flex items-center justify-center">
-            <UserIcon className="size-4 text-stone-300" />
+          <div className="size-8 rounded-full bg-slate-600 ring-2 ring-slate-700/50 flex items-center justify-center">
+            <UserIcon className="size-4 text-slate-300" />
           </div>
         </div>
       </div>
@@ -409,7 +432,7 @@ const UserActionBar: FC = () => {
       className="aui-user-action-bar-root flex flex-col items-end"
     >
       <ActionBarPrimitive.Edit asChild>
-        <TooltipIconButton tooltip={t.actions.edit} className="aui-user-action-edit p-4 text-stone-400 hover:text-stone-100">
+        <TooltipIconButton tooltip={t.actions.edit} className="aui-user-action-edit p-4 text-slate-400 hover:text-slate-100">
           <PencilIcon />
         </TooltipIconButton>
       </ActionBarPrimitive.Edit>

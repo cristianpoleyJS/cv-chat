@@ -4,9 +4,11 @@
     "title": "Engineering Manager · Senior Frontend Engineer"
   },
   "welcome": {
-    "greeting": "Hey!, I’m Cristian’s assistant",
-    "description": "Here you can ask about his experience, technical skills, leadership style, or anything else.",
-    "avatarAlt": "Cristian Poley"
+    "greeting": "Hey!, I'm Cristian's assistant",
+    "description": "Ask me about his experience, technical skills or leadership style.",
+    "avatarAlt": "Cristian Poley",
+    "downloadCV": "Download CV",
+    "cvUrl": "https://storage.googleapis.com/cristian-poley-webs.appspot.com/CristianPoleyCV-EN.pdf"
   },
   "suggestions": {
     "title": "Common questions",
@@ -26,7 +28,7 @@
       {
         "icon": "users",
         "title": "Leadership approach",
-        "label": "How do you lead and support engineers’ growth?",
+        "label": "How do you lead and support engineers' growth?",
         "prompt": "What is your leadership style and how do you help engineers grow?"
       },
       {

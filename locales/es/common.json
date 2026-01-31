@@ -5,8 +5,10 @@
   },
   "welcome": {
     "greeting": "Hey! Soy el asistente de Cristian",
-    "description": "Aquí puedes preguntarme sobre su experiencia profesional, habilidades técnicas y forma de trabajar con equipos de ingeniería.",
-    "avatarAlt": "Cristian Poley"
+    "description": "Pregúntame sobre su experiencia profesional, habilidades técnicas y forma de trabajar.",
+    "avatarAlt": "Cristian Poley",
+    "downloadCV": "Descargar CV",
+    "cvUrl": "https://storage.googleapis.com/cristian-poley-webs.appspot.com/CristianPoleyCV.pdf"
   },
   "suggestions": {
     "title": "Empieza por aquí",
